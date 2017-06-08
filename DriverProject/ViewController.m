@@ -202,6 +202,7 @@ UIAlertViewDelegate
 {
     NSLog(@"刷新");
     [self getData:@"1"];
+    [_driverTable reloadData];
 
 }
 
@@ -243,7 +244,7 @@ UIAlertViewDelegate
     _driverinformation.top=_drivername.bottom+TransfomXY(10);
 
     [self getInfo];  //获取司机资料
-    [self getData:@"1"];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -624,8 +625,7 @@ UIAlertViewDelegate
     {
         _flag=0;
         id value = [response objectForKey:@"data"];
-        if([value isKindOfClass:[NSArray class]])
-        {
+        if([value isKindOfClass:[NSArray class]]){
             for(int i=0;i<[value count];i++)
             {
                 NSDictionary *dic=[value objectAtIndex:i];
@@ -633,19 +633,17 @@ UIAlertViewDelegate
                 [_driverTable reloadData];
                 
             }
-        }
-        else
-        {
+        }else{
             [_ordersList removeAllObjects];
             [_driverTable reloadData];
         
         }
+        
         if([_ordersList count]>0)
         {
             _NotDatalable.hidden = YES;
-        }
-        else
-        {
+            
+        }else{
              _NotDatalable.hidden = NO;
         }
         
@@ -670,7 +668,7 @@ UIAlertViewDelegate
     if(_flagreply!=0&&_flagreply==iRequestTag)
     {
         _flagreply=0;
-       // [self getData];
+        
     }
     if(_flagInfo!=0&&_flagInfo==iRequestTag)
     {
