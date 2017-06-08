@@ -49,7 +49,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //    self.view.backgroundColor=Main_COLOR;
-    UIImageView *imageViewBG =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background"]];
+    UIImageView *imageViewBG =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_login"]];
     [self.view addSubview:imageViewBG];
     
     [imageViewBG mas_makeConstraints:^(MASConstraintMaker *make) {
