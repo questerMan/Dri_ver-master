@@ -488,8 +488,6 @@ UIAlertViewDelegate
     _ratingBar.hidden = YES;
    // [_DriverunButton AddButton:self];
    // _DriverunButton.backgroundColor=[UIColor grayColor];
-    
-    
 }
 
 
@@ -498,7 +496,6 @@ UIAlertViewDelegate
 
 -(void)RunDriver
 {
-
     NSLog(@"出车");
     
     MyMessage *message=[MyMessage instance] ;
@@ -544,7 +541,7 @@ UIAlertViewDelegate
     [_backButton addSubview:_mysetView];
     
 
-    _leftSwipGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftBtnClicked)];
+    _leftSwipGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftBtnClicked)];
     _leftSwipGestureRecognizer.direction=UISwipeGestureRecognizerDirectionLeft;
     [_leftSwipGestureRecognizer setNumberOfTouchesRequired:1];
     [_mysetView addGestureRecognizer:_leftSwipGestureRecognizer];
