@@ -114,6 +114,9 @@ static  CCBWindow *sharedWindow = nil;
 
 -(void)replyOrder
 {
+    
+    
+    
     if([_confirmBTitle isEqualToString:@"知道了"])
     {
         if([(NSObject *)_MainDelegate respondsToSelector:@selector(ReLoadingTableViewDate)])
@@ -133,6 +136,18 @@ static  CCBWindow *sharedWindow = nil;
     _flag=[facade putreplyOrder:IDstring lon:lon lat:lat];
     [facade addHttpObserver:self tag:_flag];    
 }
+
+- (void)crateNotificationWithDic:(NSDictionary *) userInfo
+{
+    
+    //创建一个消息对象
+    NSNotification * notice = [NSNotification notificationWithName:@"NEWS_REFRESH" object:nil userInfo:userInfo];
+    //发送消息
+    [[NSNotificationCenter defaultCenter] postNotification:notice];
+    
+}
+
+
 
 
 -(BOOL)isShow
@@ -205,6 +220,8 @@ static  CCBWindow *sharedWindow = nil;
         
         _flag=0;
         [self hideshowWindow];
+        
+        [self crateNotificationWithDic:nil];
     }
     
 }

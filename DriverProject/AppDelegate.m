@@ -407,10 +407,23 @@
         //必须加这句代码
         [UMessage didReceiveRemoteNotification:userInfo];
         
+        [self crateNotificationWithDic:userInfo];
+        
     }else{
         //应用处于后台时的本地推送接受
     }
 }
+
+- (void)crateNotificationWithDic:(NSDictionary *) userInfo
+{
+    
+    //创建一个消息对象
+    NSNotification * notice = [NSNotification notificationWithName:@"NEWS_REFRESH" object:nil userInfo:userInfo];
+    //发送消息
+    [[NSNotificationCenter defaultCenter] postNotification:notice];
+    
+}
+
 
 -(void)startGetLocation{
     

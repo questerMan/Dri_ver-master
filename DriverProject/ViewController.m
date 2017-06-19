@@ -144,6 +144,7 @@ UIAlertViewDelegate
     [self initLable];
     [self initUI];
     [self ADDtableView];
+    [self crateNotification];
     NSLog(@"viewDidLoad");
     
 
@@ -174,6 +175,27 @@ UIAlertViewDelegate
 //    MyMessage *mymessage=[MyMessage instance];
 //    NSLog(@"%@",mymessage.isOnline);
 //}
+
+- (void)crateNotification
+{
+    //获取通知中心单例对象
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
+    [center addObserver:self selector:@selector(refreshData) name:@"NEWS_REFRESH" object:nil];
+}
+
+- (void)refreshData{
+    
+    _page = 1;
+    isMore = NO;
+    
+    NSString *pageS=[NSString stringWithFormat:@"%d",(int)_page];
+    [self getData:pageS];
+    // 结束刷新
+    [_driverTable.header endRefreshing];
+    [_driverTable reloadData];
+}
+
 
 -(void)addMJRefresh
 {
