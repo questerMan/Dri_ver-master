@@ -657,20 +657,26 @@
     signString=[signString md5];
     //NSLog(@"signStringmd5==%@",signString);
     return signString;
-    
+        
 }
 
 -(NSDictionary *)convertFromDic:(NSDictionary *)httpDic
 {
     NSMutableDictionary  *muDic=[[NSMutableDictionary alloc] init];
+    NSUserDefaults* userDefaults= [NSUserDefaults standardUserDefaults];
     [muDic addEntriesFromDictionary:httpDic];
     [muDic setObject:[self timestamp] forKey:@"timestamp"];
-    [muDic setObject:[self phoneid] forKey:@"phoneid"];
+    if ([userDefaults objectForKey:@"deviceToken"]) {
+        [muDic setObject:[userDefaults objectForKey:@"deviceToken"] forKey:@"phoneid"];
+    }else{
+        [muDic setObject:[self phoneid] forKey:@"phoneid"];
+    }
     [muDic setObject:[self pvc] forKey:@"pvc"];
     [muDic setObject:[self uaString] forKey:@"ua"];
     [muDic setObject:[self convertToMd5HttpDic:muDic] forKey:@"sign"];
     return muDic;
 }
+
 -(NSString *)convertFromUrlToUrl:(NSString *)urlString
 {
     NSString *url=urlString;
@@ -682,6 +688,19 @@
     NSString *signString=[NSString stringWithFormat:@"?timestamp=%@&phoneid=%@&pvc=%@&ua=%@&sign=%@",[self timestamp],[self phoneid],[self pvc],[self uaString],[self convertToMd5HttpDic:muDic]];
     url=[url stringByAppendingString:signString];
     return url;
+}
+
+-(NSDictionary *)convertTokenFromDic:(NSDictionary *)httpDic
+{
+    NSMutableDictionary  *muDic=[[NSMutableDictionary alloc] init];
+    NSUserDefaults* userDefaults= [NSUserDefaults standardUserDefaults];
+    [muDic addEntriesFromDictionary:httpDic];
+    [muDic setObject:[self timestamp] forKey:@"timestamp"];
+    [muDic setObject:[userDefaults objectForKey:@"deviceToken"] forKey:@"phoneid"];
+    [muDic setObject:[self pvc] forKey:@"pvc"];
+    [muDic setObject:[self uaString] forKey:@"ua"];
+    [muDic setObject:[self convertToMd5HttpDic:muDic] forKey:@"sign"];
+    return muDic;
 }
 
 @end

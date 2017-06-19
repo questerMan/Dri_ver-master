@@ -410,7 +410,6 @@ UIAlertViewDelegate
     }else{
         _isRefresh = YES;
     }
-
 }
 
 

@@ -31,7 +31,7 @@
 #define HEARTBEATTIME   (60/COORDTIME)  //每次心跳时间
 #import <CoreLocation/CoreLocation.h>
 
-@interface AppDelegate ()<CCBLocationDelegate,CLLocationManagerDelegate,AMapLocationManagerDelegate,MAMapViewDelegate>
+@interface AppDelegate ()<CCBLocationDelegate,CLLocationManagerDelegate,AMapLocationManagerDelegate,MAMapViewDelegate,UNUserNotificationCenterDelegate>
 {
     CCBLocationUtil *locationUtil;
     BOOL  receiveLoationBack;
@@ -113,7 +113,7 @@
     [self configureAPIKey];
     [self configIFlySpeech];
     
-    //[self addUMMessage:launchOptions];
+    [self addUMMessage:launchOptions];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -221,7 +221,7 @@
         
         UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
                                                                                      categories:[NSSet setWithObject:categorys]];
-        [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
+        [UMessage registerForRemoteNotifications];
         
     } else{
         //register remoteNotification types
@@ -238,14 +238,24 @@
     
 #endif
     
-    //for log
+    //iOS10必须加下面这段代码。
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    center.delegate= self;
+    UNAuthorizationOptions types10=UNAuthorizationOptionBadge|  UNAuthorizationOptionAlert|UNAuthorizationOptionSound;
+    [center requestAuthorizationWithOptions:types10     completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (granted) {
+            //点击允许
+            //这里可以添加一些自己的逻辑
+        } else {
+            //点击不允许
+            //这里可以添加一些自己的逻辑
+        }
+    }];
+    //打开日志，方便调试
     [UMessage setLogEnabled:YES];
 
-
-
-
-
 }
+
 -(void)showLoginView
 {
     if(_loginView==nil){
@@ -296,11 +306,15 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    //[UMessage registerDeviceToken:deviceToken];
-    NSLog(@"deviceToken====%@",[[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
-                  stringByReplacingOccurrencesOfString: @">" withString: @""]
-                 stringByReplacingOccurrencesOfString: @" " withString: @""]);
-    
+    // 1.2.7版本开始不需要用户再手动注册devicetoken，SDK会自动注册
+    [UMessage registerDeviceToken:deviceToken];
+    NSString* newDeviceToken = [[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
+                               stringByReplacingOccurrencesOfString: @">" withString: @""]
+                              stringByReplacingOccurrencesOfString: @" " withString: @""];
+//    [UIFactory SaveNSUserDefaultsWithData:deviceToken1 AndKey:@"deviceToken"];
+    NSUserDefaults*userDefaults= [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:newDeviceToken forKey:@"deviceToken"];
+    NSLog(@"%@",newDeviceToken);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -308,7 +322,7 @@
     //关闭友盟自带的弹出框
     //    [UMessage setAutoAlert:NO];
     
-    //[UMessage didReceiveRemoteNotification:userInfo]; //如需关闭推送，请使用[UMessage unregisterForRemoteNotifications]
+    [UMessage didReceiveRemoteNotification:userInfo]; //如需关闭推送，请使用[UMessage unregisterForRemoteNotifications]
     /*
         self.userInfo = userInfo;
         //定制自定的的弹出框
@@ -368,6 +382,35 @@
     }
 }
 
+//iOS10新增：处理前台收到通知的代理方法
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        //应用处于前台时的远程推送接受
+        //关闭U-Push自带的弹出框
+        [UMessage setAutoAlert:NO];
+        //必须加这句代码
+        [UMessage didReceiveRemoteNotification:userInfo];
+        
+    }else{
+        //应用处于前台时的本地推送接受
+    }
+    //当应用处于前台时提示设置，需要哪个可以设置哪一个
+    completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionAlert);
+}
+
+//iOS10新增：处理后台点击通知的代理方法
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler{
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        //应用处于后台时的远程推送接受
+        //必须加这句代码
+        [UMessage didReceiveRemoteNotification:userInfo];
+        
+    }else{
+        //应用处于后台时的本地推送接受
+    }
+}
 
 -(void)startGetLocation{
     
@@ -391,6 +434,7 @@
     
     
 }
+
 - (void)performBlock:(void (^)(void))block afterDelay:(NSTimeInterval)delay
 {
     block = [[block copy] autorelease];
@@ -399,6 +443,7 @@
                withObject:block
                afterDelay:delay];
 }
+
 - (void)fireBlockAfterDelay:(void (^)(void))block
 {
     block();
@@ -428,6 +473,7 @@
             }
         });
     }];
+    
     _getLocationTimesNew=1;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -465,8 +511,6 @@
             [self startLocationPositingWithOption:YES];
         }
     }
-
-    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -658,6 +702,9 @@
                     NSLog(@"到达保存成功");
                     _isInsertS = YES;
                 }
+            }else{
+                
+                _isInsertS = YES;
             }
         }
         if(_ProcessStates==OrderProcess)

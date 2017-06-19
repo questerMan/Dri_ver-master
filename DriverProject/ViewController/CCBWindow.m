@@ -116,7 +116,7 @@ static  CCBWindow *sharedWindow = nil;
 {
     if([_confirmBTitle isEqualToString:@"知道了"])
     {
-        if(_MainDelegate&&[(NSObject *)_MainDelegate respondsToSelector:@selector(ReLoadingTableViewDate)])
+        if([(NSObject *)_MainDelegate respondsToSelector:@selector(ReLoadingTableViewDate)])
         {
             [_MainDelegate ReLoadingTableViewDate];
         }

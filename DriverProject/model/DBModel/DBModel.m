@@ -1544,6 +1544,7 @@
             [db executeUpdate:createTableStr];
             [db commit];
         }
+        
         [db beginTransaction];
         NSString *insertStr=[NSString stringWithFormat:@"INSERT INTO %@ (MSGTYPE,DATE,TOTALDIS,DISTANCE,LON,LAT,ORDERID,STATE) VALUES ('%@','%@','%@','%@','%@','%@','%@','%@')",TABLENAME,msgType,timeStr,totaldistance,distance,Lon,Lat,orderid,processStates];
         insertResult= [db executeUpdate:insertStr];
@@ -1561,7 +1562,8 @@
     
     return insertResult;
 }
-+(NSArray *)GetDistanceArrayfromType:(NSString *)msgType withRecentNum:(int)num
+
++ (NSArray *)GetDistanceArrayfromType:(NSString *)msgType withRecentNum:(int)num
 {
     
     //paths： ios下Document路径，Document为ios中可读写的文件夹
@@ -1570,9 +1572,8 @@
     //dbPath： 数据库路径，在Document中。
     NSString *dbPath = [documentDirectory stringByAppendingPathComponent:DBNAME];
     
-    
     //创建数据库实例 db  这里说明下:如果路径中不存在"Test.db"的文件,sqlite会自动创建"Test.db"
-    FMDatabase *db= [FMDatabase databaseWithPath:dbPath] ;
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];  
     if (![db open]) {
         ////DeBugLog(@"Could not open db.");
         return nil;
@@ -1647,8 +1648,8 @@
         //        return [[resultArr reverseObjectEnumerator] allObjects];
         return [resultArr autorelease];
     }
-
 }
+
 +(BOOL)DeleteCooMessageWithType:(NSString *)msgType
 {
     //paths： ios下Document路径，Document为ios中可读写的文件夹
