@@ -127,7 +127,7 @@ static  CCBWindow *sharedWindow = nil;
     NSString *lon=[NSString stringWithFormat:@"%f",delegate.Newestlongitude];
     NSString *lat=[NSString stringWithFormat:@"%f",delegate.Newestlatutide];
     
-    QiFacade*       facade;
+    QiFacade* facade;
     facade=[QiFacade sharedInstance];
     NSString *IDstring=[NSString stringWithFormat:@"%@",[_myOrderDetails.orderDic objectForKey:@"order_id"]];
     _flag=[facade putreplyOrder:IDstring lon:lon lat:lat];
