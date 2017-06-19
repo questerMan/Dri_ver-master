@@ -663,9 +663,14 @@
 -(NSDictionary *)convertFromDic:(NSDictionary *)httpDic
 {
     NSMutableDictionary  *muDic=[[NSMutableDictionary alloc] init];
+    NSUserDefaults* userDefaults= [NSUserDefaults standardUserDefaults];
     [muDic addEntriesFromDictionary:httpDic];
     [muDic setObject:[self timestamp] forKey:@"timestamp"];
-    [muDic setObject:[self phoneid] forKey:@"phoneid"];
+    if ([userDefaults objectForKey:@"deviceToken"]) {
+        [muDic setObject:[userDefaults objectForKey:@"deviceToken"] forKey:@"phoneid"];
+    }else{
+        [muDic setObject:[self phoneid] forKey:@"phoneid"];
+    }
     [muDic setObject:[self pvc] forKey:@"pvc"];
     [muDic setObject:[self uaString] forKey:@"ua"];
     [muDic setObject:[self convertToMd5HttpDic:muDic] forKey:@"sign"];

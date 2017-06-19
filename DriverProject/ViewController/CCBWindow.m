@@ -116,7 +116,7 @@ static  CCBWindow *sharedWindow = nil;
 {
     if([_confirmBTitle isEqualToString:@"知道了"])
     {
-        if(_MainDelegate&&[(NSObject *)_MainDelegate respondsToSelector:@selector(ReLoadingTableViewDate)])
+        if([(NSObject *)_MainDelegate respondsToSelector:@selector(ReLoadingTableViewDate)])
         {
             [_MainDelegate ReLoadingTableViewDate];
         }
@@ -131,8 +131,7 @@ static  CCBWindow *sharedWindow = nil;
     facade=[QiFacade sharedInstance];
     NSString *IDstring=[NSString stringWithFormat:@"%@",[_myOrderDetails.orderDic objectForKey:@"order_id"]];
     _flag=[facade putreplyOrder:IDstring lon:lon lat:lat];
-    [facade addHttpObserver:self tag:_flag];
-
+    [facade addHttpObserver:self tag:_flag];    
 }
 
 

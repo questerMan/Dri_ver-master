@@ -42,7 +42,6 @@
 		46BAD8521BB25B89006C5B73 /* MANaviAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BAD84F1BB25B89006C5B73 /* MANaviAnnotationView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		46BAD8531BB25B89006C5B73 /* SharedMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BAD8511BB25B89006C5B73 /* SharedMapView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		46BAD8561BB2A65E006C5B73 /* MANaviViewC.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BAD8551BB2A65E006C5B73 /* MANaviViewC.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		46BAD85B1BB2CED8006C5B73 /* libUMessage_Sdk_1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BAD8591BB2CED8006C5B73 /* libUMessage_Sdk_1.1.0.a */; };
 		46C060C91BC3B60A00827488 /* AlertViewNotdataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46C060C81BC3B60A00827488 /* AlertViewNotdataView.m */; };
 		46C060D11BC3BECA00827488 /* balancenotdataimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 46C060CB1BC3BECA00827488 /* balancenotdataimage.png */; };
 		46C060D21BC3BECA00827488 /* billnotdataImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 46C060CC1BC3BECA00827488 /* billnotdataImage.png */; };
@@ -267,6 +266,7 @@
 		B3FF34271B99B55200CCA1F8 /* ic_call_green_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FF34261B99B55200CCA1F8 /* ic_call_green_24dp.png */; };
 		B3FF34291B99B6B400CCA1F8 /* ic_directions_car_lightgray_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FF34281B99B6B400CCA1F8 /* ic_directions_car_lightgray_24dp.png */; };
 		CC2659F91EE929000076ED5D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC2659F81EE929000076ED5D /* Launch Screen.storyboard */; };
+		CC9C13471EF77CF4007F03B2 /* libUMessage_Sdk_1.5.0a.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC9C13451EF77CF4007F03B2 /* libUMessage_Sdk_1.5.0a.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -338,8 +338,6 @@
 		46BAD8511BB25B89006C5B73 /* SharedMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedMapView.m; sourceTree = "<group>"; };
 		46BAD8541BB2A65E006C5B73 /* MANaviViewC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MANaviViewC.h; sourceTree = "<group>"; };
 		46BAD8551BB2A65E006C5B73 /* MANaviViewC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MANaviViewC.m; sourceTree = "<group>"; };
-		46BAD8591BB2CED8006C5B73 /* libUMessage_Sdk_1.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.1.0.a; sourceTree = "<group>"; };
-		46BAD85A1BB2CED8006C5B73 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		46C060C71BC3B60A00827488 /* AlertViewNotdataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewNotdataView.h; sourceTree = "<group>"; };
 		46C060C81BC3B60A00827488 /* AlertViewNotdataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewNotdataView.m; sourceTree = "<group>"; };
 		46C060CB1BC3BECA00827488 /* balancenotdataimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balancenotdataimage.png; sourceTree = "<group>"; };
@@ -681,6 +679,8 @@
 		B3FF34261B99B55200CCA1F8 /* ic_call_green_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_call_green_24dp.png; sourceTree = "<group>"; };
 		B3FF34281B99B6B400CCA1F8 /* ic_directions_car_lightgray_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_directions_car_lightgray_24dp.png; sourceTree = "<group>"; };
 		CC2659F81EE929000076ED5D /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "DriverProject/Launch Screen.storyboard"; sourceTree = SOURCE_ROOT; };
+		CC9C13451EF77CF4007F03B2 /* libUMessage_Sdk_1.5.0a.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.5.0a.a; sourceTree = "<group>"; };
+		CC9C13461EF77CF4007F03B2 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -695,12 +695,12 @@
 				B352EEA41C01EB1A002246FA /* SystemConfiguration.framework in Frameworks */,
 				B352EEA21C01EB0D002246FA /* CoreTelephony.framework in Frameworks */,
 				B380533E1BBD0D25009A6CE5 /* libsqlite3.dylib in Frameworks */,
+				CC9C13471EF77CF4007F03B2 /* libUMessage_Sdk_1.5.0a.a in Frameworks */,
 				46BAD84B1BB25A2A006C5B73 /* AMapSearchKit.framework in Frameworks */,
 				46BAD8491BB25A1B006C5B73 /* AMapNaviKit.framework in Frameworks */,
 				46BAD8471BB25A12006C5B73 /* iflyMSC.framework in Frameworks */,
 				46BAD83D1BB252D1006C5B73 /* libstdc++.6.0.9.dylib in Frameworks */,
 				46BAD8391BB252AC006C5B73 /* AddressBook.framework in Frameworks */,
-				46BAD85B1BB2CED8006C5B73 /* libUMessage_Sdk_1.1.0.a in Frameworks */,
 				46BAD8371BB25291006C5B73 /* AVFoundation.framework in Frameworks */,
 				46BAD8351BB25287006C5B73 /* AudioToolbox.framework in Frameworks */,
 				46BAD8331BB25254006C5B73 /* AMapNaviKit.framework in Frameworks */,
@@ -771,23 +771,6 @@
 				46BAD8511BB25B89006C5B73 /* SharedMapView.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		46BAD8571BB2CE79006C5B73 /* UMMessage */ = {
-			isa = PBXGroup;
-			children = (
-				46BAD8581BB2CED8006C5B73 /* UMessage_Sdk_1.1.0 */,
-			);
-			path = UMMessage;
-			sourceTree = "<group>";
-		};
-		46BAD8581BB2CED8006C5B73 /* UMessage_Sdk_1.1.0 */ = {
-			isa = PBXGroup;
-			children = (
-				46BAD8591BB2CED8006C5B73 /* libUMessage_Sdk_1.1.0.a */,
-				46BAD85A1BB2CED8006C5B73 /* UMessage.h */,
-			);
-			path = UMessage_Sdk_1.1.0;
 			sourceTree = "<group>";
 		};
 		46C060CA1BC3BECA00827488 /* icon */ = {
@@ -877,7 +860,7 @@
 		B3224A551B983D8700696D66 /* DriverProject */ = {
 			isa = PBXGroup;
 			children = (
-				46BAD8571BB2CE79006C5B73 /* UMMessage */,
+				CC9C13441EF77CF4007F03B2 /* UMessage_Sdk_1.5.0a */,
 				46BAD84C1BB25B81006C5B73 /* GaodeMap */,
 				46BAD8441BB255CD006C5B73 /* Configuration */,
 				B34B4F901BAE7BF3002FEED5 /* SetView */,
@@ -1509,6 +1492,15 @@
 			name = setimage;
 			sourceTree = "<group>";
 		};
+		CC9C13441EF77CF4007F03B2 /* UMessage_Sdk_1.5.0a */ = {
+			isa = PBXGroup;
+			children = (
+				CC9C13451EF77CF4007F03B2 /* libUMessage_Sdk_1.5.0a.a */,
+				CC9C13461EF77CF4007F03B2 /* UMessage.h */,
+			);
+			path = UMessage_Sdk_1.5.0a;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1980,6 +1972,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DriverProject/UMMessage/UMessage_Sdk_1.1.0",
+					"$(PROJECT_DIR)/DriverProject/UMessage_Sdk_1.5.0a",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2011,6 +2004,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DriverProject/UMMessage/UMessage_Sdk_1.1.0",
+					"$(PROJECT_DIR)/DriverProject/UMessage_Sdk_1.5.0a",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
