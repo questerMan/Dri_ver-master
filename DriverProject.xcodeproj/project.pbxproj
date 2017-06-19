@@ -266,7 +266,7 @@
 		B3FF34271B99B55200CCA1F8 /* ic_call_green_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FF34261B99B55200CCA1F8 /* ic_call_green_24dp.png */; };
 		B3FF34291B99B6B400CCA1F8 /* ic_directions_car_lightgray_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = B3FF34281B99B6B400CCA1F8 /* ic_directions_car_lightgray_24dp.png */; };
 		CC2659F91EE929000076ED5D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC2659F81EE929000076ED5D /* Launch Screen.storyboard */; };
-		CC9C13471EF77CF4007F03B2 /* libUMessage_Sdk_1.5.0a.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC9C13451EF77CF4007F03B2 /* libUMessage_Sdk_1.5.0a.a */; };
+		CC9D63EA1EF7A38F00B8FF34 /* libUMessage_Sdk_1.5.0a.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC9D63A21EF7A38F00B8FF34 /* libUMessage_Sdk_1.5.0a.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -679,8 +679,8 @@
 		B3FF34261B99B55200CCA1F8 /* ic_call_green_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_call_green_24dp.png; sourceTree = "<group>"; };
 		B3FF34281B99B6B400CCA1F8 /* ic_directions_car_lightgray_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_directions_car_lightgray_24dp.png; sourceTree = "<group>"; };
 		CC2659F81EE929000076ED5D /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "DriverProject/Launch Screen.storyboard"; sourceTree = SOURCE_ROOT; };
-		CC9C13451EF77CF4007F03B2 /* libUMessage_Sdk_1.5.0a.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.5.0a.a; sourceTree = "<group>"; };
-		CC9C13461EF77CF4007F03B2 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		CC9D63A21EF7A38F00B8FF34 /* libUMessage_Sdk_1.5.0a.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.5.0a.a; sourceTree = "<group>"; };
+		CC9D63A31EF7A38F00B8FF34 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -695,7 +695,7 @@
 				B352EEA41C01EB1A002246FA /* SystemConfiguration.framework in Frameworks */,
 				B352EEA21C01EB0D002246FA /* CoreTelephony.framework in Frameworks */,
 				B380533E1BBD0D25009A6CE5 /* libsqlite3.dylib in Frameworks */,
-				CC9C13471EF77CF4007F03B2 /* libUMessage_Sdk_1.5.0a.a in Frameworks */,
+				CC9D63EA1EF7A38F00B8FF34 /* libUMessage_Sdk_1.5.0a.a in Frameworks */,
 				46BAD84B1BB25A2A006C5B73 /* AMapSearchKit.framework in Frameworks */,
 				46BAD8491BB25A1B006C5B73 /* AMapNaviKit.framework in Frameworks */,
 				46BAD8471BB25A12006C5B73 /* iflyMSC.framework in Frameworks */,
@@ -860,7 +860,7 @@
 		B3224A551B983D8700696D66 /* DriverProject */ = {
 			isa = PBXGroup;
 			children = (
-				CC9C13441EF77CF4007F03B2 /* UMessage_Sdk_1.5.0a */,
+				CC9D63A01EF7A38F00B8FF34 /* UMessage_Sdk_All_1.5.0a */,
 				46BAD84C1BB25B81006C5B73 /* GaodeMap */,
 				46BAD8441BB255CD006C5B73 /* Configuration */,
 				B34B4F901BAE7BF3002FEED5 /* SetView */,
@@ -1492,11 +1492,19 @@
 			name = setimage;
 			sourceTree = "<group>";
 		};
-		CC9C13441EF77CF4007F03B2 /* UMessage_Sdk_1.5.0a */ = {
+		CC9D63A01EF7A38F00B8FF34 /* UMessage_Sdk_All_1.5.0a */ = {
 			isa = PBXGroup;
 			children = (
-				CC9C13451EF77CF4007F03B2 /* libUMessage_Sdk_1.5.0a.a */,
-				CC9C13461EF77CF4007F03B2 /* UMessage.h */,
+				CC9D63A11EF7A38F00B8FF34 /* UMessage_Sdk_1.5.0a */,
+			);
+			path = UMessage_Sdk_All_1.5.0a;
+			sourceTree = "<group>";
+		};
+		CC9D63A11EF7A38F00B8FF34 /* UMessage_Sdk_1.5.0a */ = {
+			isa = PBXGroup;
+			children = (
+				CC9D63A21EF7A38F00B8FF34 /* libUMessage_Sdk_1.5.0a.a */,
+				CC9D63A31EF7A38F00B8FF34 /* UMessage.h */,
 			);
 			path = UMessage_Sdk_1.5.0a;
 			sourceTree = "<group>";
@@ -1973,6 +1981,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DriverProject/UMMessage/UMessage_Sdk_1.1.0",
 					"$(PROJECT_DIR)/DriverProject/UMessage_Sdk_1.5.0a",
+					"$(PROJECT_DIR)/DriverProject/UMessage_Sdk_All_1.5.0a/UMessage_Sdk_1.5.0a",
+					"$(PROJECT_DIR)/DriverProject/UMessage_Sdk_All_1.5.0a/UMessage_Sdk_Demo/UMessage_Sdk_Demo/UMessage_Sdk_1.5.0a",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2005,6 +2015,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DriverProject/UMMessage/UMessage_Sdk_1.1.0",
 					"$(PROJECT_DIR)/DriverProject/UMessage_Sdk_1.5.0a",
+					"$(PROJECT_DIR)/DriverProject/UMessage_Sdk_All_1.5.0a/UMessage_Sdk_1.5.0a",
+					"$(PROJECT_DIR)/DriverProject/UMessage_Sdk_All_1.5.0a/UMessage_Sdk_Demo/UMessage_Sdk_Demo/UMessage_Sdk_1.5.0a",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
