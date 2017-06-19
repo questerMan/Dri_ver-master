@@ -12,12 +12,11 @@
 
 
 #pragma mark   登录
--(NSInteger)postLogon:(NSString *)phone password:(NSString *)password
+- (NSInteger)postLogon:(NSString *)phone password:(NSString *)password
 {
     NSMutableDictionary* requestDict = [NSMutableDictionary dictionary];
     [requestDict setObject:phone forKey:@"phone"];
     [requestDict setObject:password forKey:@"password"];
-    
 //    [requestDict setObject:@"15218817202" forKey:@"phone"];
 //    [requestDict setObject:@"111111" forKey:@"password"];
     NSString *poatURL=[NSString stringWithFormat:@"%@/common/login?",SEVER_API];
@@ -26,7 +25,7 @@
     NSInteger IntegerPost=0;
     IntegerPost=[self handleDataIsDictionaryPost:poatURL paraDic:requestDict];
     
-    return IntegerPost;
+    return IntegerPost; 
 }
 
 

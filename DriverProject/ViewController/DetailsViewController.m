@@ -270,7 +270,7 @@
 
 
 
--(void)putStateGoToPickUpDis
+- (void)putStateGoToPickUpDis
 {
     QiFacade*       facade;
     facade=[QiFacade sharedInstance];
@@ -295,7 +295,6 @@
         NSString *orderString=[NSString stringWithFormat:@"/order/%@/getoff",_orderID];
         _flagorder=[facade putDriverOrderState:orderString pointlat:latutide pointlon:longitude distance:totalDistance  ext:_extraPay];
     }
-
 }
 
 -(void)goTo
@@ -439,7 +438,6 @@
             break;
         }
 
-            
         default:
             break;
     }

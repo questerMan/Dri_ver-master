@@ -62,14 +62,12 @@
         
         [self showLoadingWithText:@""];
     }
-    
 }
 
 
 #pragma mark   init
 -(void)initNavigation
 {
-    
     _NavigationBackView=[[UIView alloc]initWithFrame:CGRectZero];
     _NavigationBackView.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:_NavigationBackView];
@@ -81,7 +79,6 @@
     [_BackButton2 setBackgroundImage:[UIImage imageNamed:@"common_navbar_return.png"] forState:UIControlStateNormal];
     [self.view addSubview:_BackButton2];
     
-    
     _BackButton=[UIButton buttonWithType:UIButtonTypeCustom];
     _BackButton.frame=CGRectZero;
     _BackButton.backgroundColor=[UIColor clearColor];
@@ -89,7 +86,6 @@
     //[_BackButton setBackgroundImage:[UIImage imageNamed:@"common_navbar_return.png"] forState:UIControlStateNormal];
     [self.view addSubview:_BackButton];
 
-    
     _ViewOrdersLable=[[UILabel alloc]initWithFrame:CGRectZero];
     _ViewOrdersLable.text=@"查看订单";
     _ViewOrdersLable.textColor=Textblack_COLOR;

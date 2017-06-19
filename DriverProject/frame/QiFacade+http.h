@@ -151,4 +151,11 @@
                     tag:(NSInteger)iRequestTag
                 success:(BOOL)bSuccess;
 
+/**
+ *  //添加设备自身参数及加密数据签名
+ *
+ *  @param httpDic   需添加参数的字典
+ */
+-(NSDictionary *)convertTokenFromDic:(NSDictionary *)httpDic;
+
 @end
