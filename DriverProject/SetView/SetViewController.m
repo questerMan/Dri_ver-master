@@ -184,7 +184,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 
 {
-    NSInteger intergerNum = 1;
+    NSInteger intergerNum = 2;
     
     return intergerNum;
 }
@@ -208,7 +208,7 @@
     if(indexPath.row==1)
     {
         sectionCell.setimage.image=[UIImage imageNamed:@"ic_loop_darkgray.png"];
-        sectionCell.setlable.text=@"检查更新";
+        sectionCell.setlable.text= [NSString stringWithFormat:@"当前版本:%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
     }
     
     //最后一行不缩进
