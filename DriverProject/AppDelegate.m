@@ -105,7 +105,7 @@
     [[IFlySpeechSynthesizer sharedInstance] setParameter:@"8000" forKey:[IFlySpeechConstant SAMPLE_RATE]];
     
     // 当你再不需要保存音频时，请在必要的地方加上这行。
-    [[IFlySpeechSynthesizer sharedInstance] setParameter:nil forKey:[IFlySpeechConstant TTS_AUDIO_PATH]];
+    [[IFlySpeechSynthesizer sharedInstance] setParameter:nil forKey:[IFlySpeechConstant TTS_AUDIO_PATH]];   
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -424,7 +424,6 @@
     
 }
 
-
 -(void)startGetLocation{
     
     if (receiveLoationBack) {
@@ -469,8 +468,6 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     
     NSLog(@"\n ===> 程序暂行 !");
-    
-    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {

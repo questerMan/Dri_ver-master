@@ -46,6 +46,7 @@
 @implementation LoginViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //    self.view.backgroundColor=Main_COLOR;
@@ -57,13 +58,9 @@
     }];
     
     [self initField];
-    
-    
-    
-    
 }
 
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [_scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
@@ -71,12 +68,12 @@
     // 设置键盘通知或者手势控制键盘消失
     [self KeyboardMessage];
 }
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-    
 }
 
 
@@ -84,7 +81,6 @@
 {
     
     _flag=0;
-    
     
     _scrollView=[[UIScrollView alloc]initWithFrame:[UIScreen mainScreen].bounds];
     _scrollView.scrollEnabled=YES;
@@ -97,18 +93,15 @@
     
     [self AddImageView];
     
-    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidekeyboardType)];
     [_scrollView addGestureRecognizer:tapGestureRecognizer];
-    
-    
-    
     
     [self addForgetpassword];
     
     [self AddButton];
     
 }
+
 -(void)addForgetpassword{
     UIButton *forgetpassword=[UIButton buttonWithType:UIButtonTypeCustom];
     forgetpassword.titleLabel.font=[UIFont systemFontOfSize:MATCHSIZE(26)];
@@ -125,6 +118,7 @@
         make.width.offset(MATCHSIZE(200));
     }];
 }
+
 -(void)AddImageView
 {
     UIImageView *loginImage=[[UIImageView alloc]init];
@@ -176,9 +170,8 @@
     UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(SCREEN_W/2 - MATCHSIZE(490)/2,_userNameField.bottom ,MATCHSIZE(490), LINE_HEIGHT)];
     lineView.backgroundColor = UIColorFromRGB(@"#3ab48f");
     [mainView addSubview:lineView];
-    
-    
 }
+
 -(void)addTextField:(UITextField *)textField ToView:(UIView *)mainView withTitle:(NSString *)title andTitleYoffset:(CGFloat)y_offset isPassword:(BOOL)isPassword{
     //42
     UIImageView *FieldImageView=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_W/2 - MATCHSIZE(490)/2,y_offset+MATCHSIZE(50)+12 , 20, 20)];
@@ -209,11 +202,9 @@
     UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(SCREEN_W/2 - MATCHSIZE(490)/2,_passwordField.bottom ,MATCHSIZE(490), LINE_HEIGHT)];
     lineView.backgroundColor = UIColorFromRGB(@"#3ab48f");
     [mainView addSubview:lineView];
-    
-    
-    
-    
+
 }
+
 -(void)AddButton
 {
     UIButton *loginBtn=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -271,8 +262,8 @@
         [_scrollView setContentOffset:CGPointMake(0, 150) animated:YES];
     }
     
-    
 }
+
 -(void)keyboardWillHide:(NSNotification *)Notification
 {
     NSDictionary *userInfo=[Notification userInfo];
