@@ -77,7 +77,7 @@
         self.locationManager = [[AMapLocationManager alloc] init];
         self.locationManager.delegate = self;
         [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-        self.locationManager.distanceFilter = 100;
+        self.locationManager.distanceFilter = kCLDistanceFilterNone;
         [self.locationManager setPausesLocationUpdatesAutomatically:NO];
         
         [self.locationManager setAllowsBackgroundLocationUpdates:YES];
@@ -520,6 +520,9 @@
         {
             [self startLocationPositingWithOption:YES];
         }
+        
+        [self crateNotificationWithDic:nil];
+
     }
 }
 
@@ -697,6 +700,8 @@
                 {
                     NSLog(@"保存成功");
                     _isInsertS = YES;
+                    
+                    self.locationManager.distanceFilter = 100;
                 }
             }
             
@@ -711,10 +716,14 @@
                 {
                     NSLog(@"到达保存成功");
                     _isInsertS = YES;
+                    
+                    self.locationManager.distanceFilter = 100;
                 }
             }else{
                 
                 _isInsertS = YES;
+                
+                self.locationManager.distanceFilter = 100;
             }
         }
         if(_ProcessStates==OrderProcess)
