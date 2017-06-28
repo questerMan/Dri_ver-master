@@ -11,6 +11,8 @@
 #import "AppDelegate.h"
 #import "CCBLocationUtil.h"
 
+#import "AFNetworking.h"
+
 #import "SocketOne.h"
 #import "CCBWindow.h"
 #import "MyMessage.h"
@@ -150,10 +152,41 @@
 //    }
     //+++++++++++++++++++++++++++++
 
+    //启动监测网络状态
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(networkChange:) name:AFNetworkingReachabilityDidChangeNotification object:nil];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newOrderselector:) name:@"NewOrderNotifi" object:nil];
     return YES;
+}
+#pragma mark - - 网络变化
+- (void)networkChange:(NSNotification *)networkChnageNoti
+{
+    NSLog(@"网络变化%@",networkChnageNoti.userInfo);
+    
+    NSInteger networkStatu = [[networkChnageNoti.userInfo objectForKey:@"AFNetworkingReachabilityNotificationStatusItem"] integerValue];
+    
+    switch (networkStatu) {
+            case AFNetworkReachabilityStatusUnknown:
+            NSLog(@"未识别的网络");
+            break;
+            
+            case AFNetworkReachabilityStatusNotReachable:
+            NSLog(@"不可达的网络(未连接)");
+            break;
+            
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+            NSLog(@"2G,3G,4G...的网络");
+            break;
+            
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+            NSLog(@"wifi的网络");
+            break;
+        default:
+            break;
+    }
 }
 
 -(void)RunSocket
