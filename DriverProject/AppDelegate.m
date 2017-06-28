@@ -12,6 +12,7 @@
 #import "CCBLocationUtil.h"
 
 #import "AFNetworking.h"
+#import "MBProgressHUD.h"
 
 #import "SocketOne.h"
 #import "CCBWindow.h"
@@ -171,12 +172,12 @@
     
     switch (networkStatu) {
             case AFNetworkReachabilityStatusUnknown:
-            
+            [self showTextOnlyWith:@"未识别的网络"];
             NSLog(@"未识别的网络");
             break;
             
             case AFNetworkReachabilityStatusNotReachable:
-            
+            [self showTextOnlyWith:@"无网络状态"];
             NSLog(@"不可达的网络(未连接)");
             break;
             
@@ -195,7 +196,16 @@
             break;
     }
 }
-
+-(void)showTextOnlyWith:(NSString *)text
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = text;
+    hud.margin = 10.f;
+    hud.removeFromSuperViewOnHide = YES;
+    
+    [hud hide:YES afterDelay:3];
+}
 -(void)RunSocket
 {
     NSUserDefaults*userDefaults= [NSUserDefaults standardUserDefaults];
