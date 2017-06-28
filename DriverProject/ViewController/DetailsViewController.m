@@ -116,14 +116,13 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrderProcessNewsSender:) name:@"OrderProcessNews" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrderCancelSender:) name:@"CancelOrderNotifi" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:@"requestOrderData" object:nil];
     
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-
     [self requestData];
-
 }
 
 -(void)requestData

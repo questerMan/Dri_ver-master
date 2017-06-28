@@ -161,6 +161,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newOrderselector:) name:@"NewOrderNotifi" object:nil];
     return YES;
 }
+
 #pragma mark - - 网络变化
 - (void)networkChange:(NSNotification *)networkChnageNoti
 {
@@ -170,18 +171,24 @@
     
     switch (networkStatu) {
             case AFNetworkReachabilityStatusUnknown:
+            
             NSLog(@"未识别的网络");
             break;
             
             case AFNetworkReachabilityStatusNotReachable:
+            
             NSLog(@"不可达的网络(未连接)");
             break;
             
             case AFNetworkReachabilityStatusReachableViaWWAN:
+            [self crateNotificationWithDic:nil Name:@"NEWS_REFRESH"];
+            [self crateNotificationWithDic:nil Name:@"requestOrderData"];
             NSLog(@"2G,3G,4G...的网络");
             break;
             
             case AFNetworkReachabilityStatusReachableViaWiFi:
+            [self crateNotificationWithDic:nil Name:@"NEWS_REFRESH"];
+            [self crateNotificationWithDic:nil Name:@"requestOrderData"];
             NSLog(@"wifi的网络");
             break;
         default:
@@ -440,21 +447,20 @@
         //必须加这句代码
         [UMessage didReceiveRemoteNotification:userInfo];
         
-        [self crateNotificationWithDic:userInfo];
+        [self crateNotificationWithDic:userInfo Name:@"NEWS_REFRESH"];
         
     }else{
         //应用处于后台时的本地推送接受
     }
 }
 
-- (void)crateNotificationWithDic:(NSDictionary *) userInfo
+- (void)crateNotificationWithDic:(NSDictionary *)userInfo Name:(NSString *)name
 {
     
     //创建一个消息对象
-    NSNotification * notice = [NSNotification notificationWithName:@"NEWS_REFRESH" object:nil userInfo:userInfo];
+    NSNotification * notice = [NSNotification notificationWithName:name object:nil userInfo:userInfo];
     //发送消息
     [[NSNotificationCenter defaultCenter] postNotification:notice];
-    
 }
 
 -(void)startGetLocation{
@@ -554,7 +560,7 @@
             [self startLocationPositingWithOption:YES];
         }
         
-        [self crateNotificationWithDic:nil];
+        [self crateNotificationWithDic:nil Name:@"NEWS_REFRESH"];
 
     }
 }
