@@ -28,7 +28,6 @@
     return IntegerPost; 
 }
 
-
 #pragma    mark 心跳  持续定位
 -(NSInteger)postHeartbeat:(NSString *)lat pointlon:(NSString *)lon
 {
@@ -45,12 +44,7 @@
     return IntegerPost;
 }
 
-
-
-
-
 #pragma    mark 忘记密码
-
 -(NSInteger)postForgetPassord:(NSString *)phone password:(NSString *)password vcode:(NSString *)code
 {
     NSMutableDictionary* requestDict = [NSMutableDictionary dictionary];

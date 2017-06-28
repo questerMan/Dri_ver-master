@@ -637,7 +637,7 @@
         }else{
             //self.getLocationTimes++;
             //[self startGetLocation];
-            return;
+            return; 
         }
     }
     self.getLocationTimes=1;
