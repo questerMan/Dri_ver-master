@@ -261,7 +261,6 @@
     {
         [_scrollView setContentOffset:CGPointMake(0, 150) animated:YES];
     }
-    
 }
 
 -(void)keyboardWillHide:(NSNotification *)Notification
@@ -274,8 +273,6 @@
     NSLog(@"键盘高度为:%d",height);
     
     [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    
-    
 }
 
 -(void)hidekeyboardType
