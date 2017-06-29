@@ -181,7 +181,7 @@ UIAlertViewDelegate
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
     [center addObserver:self selector:@selector(refreshData) name:@"NEWS_REFRESH" object:nil];
 }
-
+#pragma mark - 出勤
 - (void)refreshData{
     
     _page = 1;
@@ -192,6 +192,9 @@ UIAlertViewDelegate
     // 结束刷新
     [_driverTable.header endRefreshing];
     [_driverTable reloadData];
+    
+    //出勤
+    [self refreshRunDriver];
 }
 
 
@@ -201,6 +204,9 @@ UIAlertViewDelegate
     
     // 下拉刷新
     tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        //出勤
+        [self refreshRunDriver];
         
         _page = 1;
         isMore = NO;
@@ -519,8 +525,27 @@ UIAlertViewDelegate
     // [_DriverunButton AddButton:self];
     // _DriverunButton.backgroundColor=[UIColor grayColor];
 }
-
-
+#pragma mark - 只有点击出行上班之后才有一些列刷新
+-(void)refreshRunDriver{
+    
+        NSLog(@"出车");
+        
+        MyMessage *message=[MyMessage instance] ;
+        NSString *isOnline=message.isOnline;
+        
+        QiFacade*       facade;
+        facade=[QiFacade sharedInstance];
+        
+        if([isOnline isEqualToString:@"NO"]){
+            
+        }
+        else
+        {
+            _flagOnline=[facade putDriverAttendance];
+            [facade addHttpObserver:self tag:_flagOnline];
+        }
+    
+}
 
 #pragma 私有方法
 
