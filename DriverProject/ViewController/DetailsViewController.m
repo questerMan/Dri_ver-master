@@ -304,7 +304,7 @@
 
 - (void)putStateGoToPickUpDis
 {
-    QiFacade*       facade;
+    QiFacade* facade;
     facade=[QiFacade sharedInstance];
     NSArray *array=[DBModel GetDistanceArrayfromType:@"2" withRecentNum:1];
     NSArray *resultArray=[array objectAtIndex:0];
