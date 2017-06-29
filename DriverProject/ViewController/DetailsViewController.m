@@ -18,13 +18,13 @@
 
 @interface DetailsViewController ()<CCBLocationDelegate,UIAlertViewDelegate,MANaviViewDelegate>
 {
-
+    
     NSInteger _flag;
     NSDictionary *_orderDetailDic;
     NSInteger _flagorder;
     CCBLocationUtil *locationUtil;
     BOOL  receiveLoationBack;
-
+    
 }
 @property(nonatomic,copy)void (^returnLocationblock)(void);
 @property(nonatomic,strong)NSString *extraPay;
@@ -32,7 +32,7 @@
 @end
 
 @implementation DetailsViewController
-        
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -105,24 +105,57 @@
     _ConfirmButton.frame=CGRectMake(20, 25, 50, 50);
     _ConfirmButton.backgroundColor=Assist_COLOR;
     _ConfirmButton.layer.cornerRadius=_ConfirmButton.width/2;
-     _ConfirmButton.layer.masksToBounds = YES;
+    _ConfirmButton.layer.masksToBounds = YES;
     [_ConfirmButton addTarget:self action:@selector(Confirm) forControlEvents:UIControlEventTouchUpInside];
     _ConfirmButton.center=CGPointMake(KScreenWidth-40, 200);
     [_ConfirmButton setImage:[UIImage imageNamed:@"ic_chevron_right_white.png"] forState:UIControlStateNormal];
     [self.view addSubview:_ConfirmButton];
-
+    
     
     [self.backview.ConfirmButton addTarget:self action:@selector(goTo) forControlEvents:UIControlEventTouchUpInside];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrderProcessNewsSender:) name:@"OrderProcessNews" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OrderCancelSender:) name:@"CancelOrderNotifi" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:@"requestOrderData" object:nil];
+    //订单已经支付
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lookOrderDetails:) name:@"PaidOrderNotifi" object:nil];
+}
+- (void)CancelRefreshMainTable:(NSNotification *)info{
     
+    //
+    //    [DBModel DeleteCooMessageWithType:@"2"];
+    //
+    //
+    //    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"乘客已取消用车，请停止本次服务!" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+    //    alert.tag = 1003;
+    //    [alert show];
+}
+
+
+-(void)lookOrderDetails:(NSNotification *)info{
+    
+    NSLog(@"－－－－－支付订单------");
+    NSLog(@"%@",info.userInfo);
+    NSDictionary *dic=[[NSDictionary alloc]initWithDictionary:info.userInfo];
+    
+    NSString *action=[dic objectForKey:@"action"];
+    if([action isEqualToString:@"order_paid"])
+    {
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜" message:@"您有一个订单已支付，请继续下次服务" delegate:self cancelButtonTitle:@"查看订单详情" otherButtonTitles:@"知道了", nil];
+        alert.tag = 2001;
+        [alert show];
+    }
+    
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [self requestData];
+    flages = 2;
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    flages = 0;
 }
 
 -(void)requestData
@@ -151,7 +184,7 @@
         _Timelable.text=title;
         NSLog(@"_Timelable=%@",_Timelable);
     }
-
+    
     NSString *lableStr =@"";
     lableStr =[NSString stringWithFormat:@"¥%@/%@km/%@min",[[dic objectForKey:@"fee"] stringValue],[[dic objectForKey:@"km"] stringValue],[[dic objectForKey:@"min"] stringValue]];
     [self setFrameDistancelable:lableStr];
@@ -178,15 +211,15 @@
     if ([_delegate respondsToSelector:@selector(refreshMainView:)]) {
         [_delegate refreshMainView:NO];
     }
-      [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)Confirm
 {
-
+    
     if(_driverstates==StateEndAndPay)  return;
     [self showAlertView:_driverstates];
-
+    
 }
 
 -(void)showAlertView:(OrdersStates)states
@@ -195,7 +228,7 @@
     NSString *title,*content;
     if(states==StateNullOrders)
     {
-  
+        
     }
     if(states==StateReceiveOrders)
     {
@@ -228,10 +261,10 @@
     }
     if(states==StateEndAndPay)
     {
- 
+        
     }
     UIAlertView *alert=[[UIAlertView alloc]initWithTitle:title message:content delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
-
+    
     if(states!=StateGoToPickUp)
     {
         alert.alertViewStyle=UIAlertViewStyleDefault;
@@ -263,8 +296,8 @@
             delegate.isInsertS = YES;
         }
     }
-
-
+    
+    
 }
 
 
@@ -308,15 +341,15 @@
     //+++++++++
     if(_driverstates==StateNullOrders)
     {
-
-
+        
+        
         
     }
     else if(_driverstates==StateReceiveOrders)
     {
         NSString *orderString=[NSString stringWithFormat:@"/order/%@/setoff",_orderID];
         _flagorder= [facade putDriverOrderState:orderString pointlat:latutide pointlon:longitude distance:@"100"];
-    
+        
     }
     
     else if(_driverstates==Statesetoff)
@@ -328,7 +361,7 @@
     {
         NSString *orderString=[NSString stringWithFormat:@"/order/%@/geton",_orderID];
         _flagorder=[facade putDriverOrderState:orderString pointlat:latutide pointlon:longitude];
-            
+        
         
     }
     else if(_driverstates==StateGoToPickUp)
@@ -336,19 +369,19 @@
         
         [self putStateGoToPickUpDis];
     }
-
+    
     else if(_driverstates==StateBilling)
     {
-         _flagorder=[facade putrDriverPaid:_orderID];
+        _flagorder=[facade putrDriverPaid:_orderID];
     }
     else if(_driverstates==StateEndAndPay)
     {
-
+        
     }
-
+    
     [facade addHttpObserver:self tag:_flagorder];
     [self DismossView];
-
+    
 }
 
 
@@ -358,13 +391,13 @@
 
 {
     NSInteger intergerNum=4;
-   //type  1即使单  2预约用车  3 预约接机  4预约送机
+    //type  1即使单  2预约用车  3 预约接机  4预约送机
     NSString *type=[NSString stringWithFormat:@"%@",[_orderDetailDic objectForKey:@"type"]];
     if([type isEqualToString:@"3"] || [type isEqualToString:@"4"])
     {
         intergerNum=5;
     }
-
+    
     return intergerNum;
 }
 
@@ -387,7 +420,7 @@
             sectionCell.setimage.image=[UIImage imageNamed:@"ic_access_time_darkgray_24dp.png"];
             sectionCell.setlable.text=[_orderDetailDic objectForKey:@"time"];
             break;
-
+            
         case 1:
         {
             sectionCell.setimage.image=[UIImage imageNamed:@"ic_place_green_24dp.png"];
@@ -414,13 +447,13 @@
             {
                 sectionCell.setlable.text=[NSString stringWithFormat:@"%@   %@",[passengerDic objectForKey:@"name"],[passengerDic objectForKey:@"phone"]];
             }
-
+            
             break;
         }
         case 4:
         {
-//type  1即使单  2预约用车  3 预约接机  4预约送机
-
+            //type  1即使单  2预约用车  3 预约接机  4预约送机
+            
             sectionCell.setimage.image=[UIImage imageNamed:@"ic_flight_darkgray_24dp.png"];
             NSDictionary *flightDic=[_orderDetailDic objectForKey:@"flight"];
             NSString *type=[NSString stringWithFormat:@"%@",[_orderDetailDic objectForKey:@"type"]];
@@ -431,12 +464,12 @@
             }
             if([type isEqualToString:@"4"])
             {
-               flightS = @"送机";
+                flightS = @"送机";
             }
             sectionCell.setlable.text=flightS;
             break;
         }
-
+            
         default:
             break;
     }
@@ -447,7 +480,7 @@
         sectionCell.setlable.text=@"";
     }
     //最后一行不缩进
-
+    
     
     
     
@@ -465,9 +498,9 @@
         {
             sectionCell.isIndentationWidth=NO;
         }
-
+        
     }
-
+    
     return sectionCell;
 }
 
@@ -485,44 +518,66 @@
 #pragma mark -AlertView Delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+
     _extraPay=@"0";
-    if(buttonIndex==0)
-    {
-        if(alertView.alertViewStyle==UIAlertViewStylePlainTextInput)
+    NSInteger tags = alertView.tag;
+    if(tags == 2001){
+        
+        if(buttonIndex == 0)
         {
-            NSString *pay=[alertView textFieldAtIndex:0].text;
-            if(![pay isEqualToString:@""])
-            {
-                _extraPay=pay;
-                NSLog(@"_extraPay==%@",_extraPay);
-                [[alertView textFieldAtIndex:0] resignFirstResponder];
+            ViewOrdersController *detailsView=[[ViewOrdersController alloc] init];
+            detailsView.orderID = self.orderID;
+            [self.navigationController pushViewController:detailsView animated:YES];
+            
+        }else{
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            if ([_delegate respondsToSelector:@selector(refreshMainView:)]) {
+                [_delegate refreshMainView:NO];
             }
-            [self stopCalculatePay];
         }
-        else
+        
+        
+    }else{
+        
+        if(buttonIndex==0)
         {
-            if(_driverstates==StateGoToArrived)
+            if(alertView.alertViewStyle==UIAlertViewStylePlainTextInput)
             {
-                AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
-                if(delegate.isInsertS)
+                NSString *pay=[alertView textFieldAtIndex:0].text;
+                if(![pay isEqualToString:@""])
                 {
-                    [self goTo];
+                    _extraPay=pay;
+                    NSLog(@"_extraPay==%@",_extraPay);
+                    [[alertView textFieldAtIndex:0] resignFirstResponder];
                 }
-                else
-                {
-                    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"获取定位失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                    [alert show];
-                }
+                [self stopCalculatePay];
             }
             else
             {
-                [self goTo];
-                if ([_delegate respondsToSelector:@selector(refreshMainView:)]) {
-                    [_delegate refreshMainView:NO];
+                if(_driverstates==StateGoToArrived)
+                {
+                    AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+                    if(delegate.isInsertS)
+                    {
+                        [self goTo];
+                    }
+                    else
+                    {
+                        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"获取定位失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                        [alert show];
+                    }
+                }
+                else
+                {
+                    [self goTo];
+                    if ([_delegate respondsToSelector:@selector(refreshMainView:)]) {
+                        [_delegate refreshMainView:NO];
+                    }
                 }
             }
+            
         }
- 
     }
 }
 
@@ -587,7 +642,7 @@
         CGFloat Lon=[[dest objectForKey:@"lon"]floatValue];
         
         AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
-
+        
         MANaviViewC *manaviViewC=[[MANaviViewC alloc] init];
         manaviViewC.delegate = self;
         if(delegate.Newestlatutide!=0 &&delegate.Newestlongitude!=0)
@@ -597,15 +652,15 @@
             
             [self presentViewController:manaviViewC animated:YES completion:^{
             }];
-//            NavigationMapVC *navigaMap = [[NavigationMapVC alloc] init];
-//            [self.navigationController pushViewController:manaviViewC animated:YES];
+            //            NavigationMapVC *navigaMap = [[NavigationMapVC alloc] init];
+            //            [self.navigationController pushViewController:manaviViewC animated:YES];
         }
         else
         {
             UIAlertView *alert =[[UIAlertView alloc] initWithTitle:nil message:@"定位失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
         }
-    
+        
     }
     if(indexPath.row==3)
     {
@@ -617,7 +672,7 @@
 
 -(void)refreshView{
     
-//    [self requestData];
+    //    [self requestData];
     
     [_DetailsTableView reloadData];
     
@@ -655,8 +710,8 @@
         NSString *statusString=[NSString stringWithFormat:@"%@",[_orderDetailDic objectForKey:@"status"]];
         NSInteger status=[statusString integerValue];
         if(status==0)status=1;
-       
-
+        
+        
         switch (status) {
             case 0:
                 _driverstates=StateNullOrders;
@@ -678,7 +733,7 @@
                 lableStr =@"带十分小心上路，携一份平安回家";
                 delegate.ProcessStates=Orderonway;
                 delegate.orderID=_orderID;
-
+                
                 break;
             }
             case 3:
@@ -689,7 +744,7 @@
                 lableStr =@"耐心，是我们丽新人的品质！";
                 delegate.ProcessStates=Orderarrived;
                 delegate.orderID=_orderID;
-
+                
                 break;
             }
             case 4:{
@@ -698,12 +753,12 @@
                 lableStr =@"¥0.00/0km/0min";
                 delegate.ProcessStates=OrderProcess;
                 delegate.orderID=_orderID;
-
+                
                 break;
             }
             case 5:{
                 _driverstates=StateBilling;
-                 // lableStr =@"¥120.00/1.2km/70min";
+                // lableStr =@"¥120.00/1.2km/70min";
                 if(OrderDic)
                 {
                     _Timelable.text=[NSString stringWithFormat:@"%@元",[[OrderDic objectForKey:@"fee"] stringValue]];
@@ -714,7 +769,7 @@
                     _Timelable.text=[NSString stringWithFormat:@"%@元",[[response objectForKey:@"fee"] stringValue]];
                     lableStr=[NSString stringWithFormat:@"¥%@/%@km/%@min",[[response objectForKey:@"fee"] stringValue],[[response objectForKey:@"km"] stringValue],[[response objectForKey:@"minutes"] stringValue]];
                 }
-                  [_ConfirmButton setImage:[UIImage imageNamed:@"ic_money_white@3x.png"] forState:UIControlStateNormal];
+                [_ConfirmButton setImage:[UIImage imageNamed:@"ic_money_white@3x.png"] forState:UIControlStateNormal];
                 delegate.ProcessStates=Ordergetoff;
                 delegate.orderID=_orderID;
                 break;
@@ -753,7 +808,7 @@
             lableStr =@"带十分小心上路，携一份平安回家";
             
             delegate.ProcessStates=Orderonway;
-            delegate.orderID=_orderID;   
+            delegate.orderID=_orderID;
             
         }
         else if(_driverstates==Statesetoff)
@@ -799,7 +854,7 @@
             delegate.orderID=_orderID;
             [self BackViewController];
         }
- 
+        
     }
     //调整
     [self setFrameDistancelable:lableStr];
@@ -809,7 +864,7 @@
 
 -(void)setFrameDistancelable:(NSString *)lableStr
 {
-
+    
     if(_driverstates!=StateNOTKnown)
     {
         [_Timelable sizeToFit];
@@ -841,7 +896,7 @@
     {
         NSLog(@"Message==%@",Message);
     }
-
+    
     NSLog(@"失败 /n%@",response);
     
 }
@@ -869,9 +924,9 @@
         _Timelable.text=@"接机服务";
         lableStr =@"为了确保服务顺利，请酌情出发";
     }
-
+    
     return  lableStr;
-
+    
 }
 
 

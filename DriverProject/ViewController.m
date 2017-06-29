@@ -47,7 +47,7 @@ UIAlertViewDelegate
     UILabel *_NotDatalable;
     BOOL    _isRefresh;
     
-
+    
     
 }
 @property(nonatomic,strong)UIButton *backButton;
@@ -69,14 +69,14 @@ UIAlertViewDelegate
     [_setButton addTarget:self action:@selector(setBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [_setButton setBackgroundImage:[UIImage imageNamed:@"ic_menu_white_24dp.png"] forState:UIControlStateNormal];
     [self.view addSubview:_setButton];
-
+    
     _setButton.center=CGPointMake(15, CUSTOM_NAV_HEIGHT/2);
     if(IOS7_OR_LATER)
     {
         _setButton.center=CGPointMake(15, 20+(CUSTOM_NAV_HEIGHT-20)/2);
-
+        
     }
-
+    
     _setButton.left=18;
     _driverTable=[[UITableView alloc]initWithFrame:FRAME(0, 200, KScreenWidth, KScreenHeight-200) style:UITableViewStylePlain];    _driverTable.delegate = self;
     _driverTable.separatorColor=[UIColor clearColor];
@@ -84,14 +84,14 @@ UIAlertViewDelegate
     _driverTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _driverTable.dataSource = self;
     [self.view addSubview:_driverTable];
-
+    
     _NotDatalable=[[UILabel alloc]initWithFrame:CGRectZero];
     _NotDatalable.text=@"没有可服务的订单！";
     _NotDatalable.textColor=TextDisable_COLOR;
     _NotDatalable.textAlignment=NSTextAlignmentCenter;
     _NotDatalable.font=[UIFont systemFontOfSize:14];
     [self.view addSubview:_NotDatalable];
-//    [_NotDatalable sizeToFit];
+    //    [_NotDatalable sizeToFit];
     _NotDatalable.width = self.view.width;
     _NotDatalable.height = 30;
     _NotDatalable.backgroundColor = [UIColor whiteColor];
@@ -111,8 +111,8 @@ UIAlertViewDelegate
     [self.view addSubview:_DriverunButton];
     _DriverunButton.center=CGPointMake(KScreenWidth-40, KScreenHeight-40);
     _DriverunButton.titleLabel.textColor=UIColorFromRGB(0xffffff);
-
-
+    
+    
     [self addButton];
 }
 
@@ -125,7 +125,7 @@ UIAlertViewDelegate
     [self.view addSubview:mysetButton];
     
     mysetButton.center=_setButton.center;
-
+    
 }
 
 - (void)viewDidLoad {
@@ -147,12 +147,12 @@ UIAlertViewDelegate
     [self crateNotification];
     NSLog(@"viewDidLoad");
     
-
+    
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newOrderselector:) name:@"NewOrderNotifi" object:nil];
     CCBWindow *Mywindow=[CCBWindow instance];
     Mywindow.MainDelegate=self;
     
-
+    
     _rightSwipGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(setBtnClicked)];
     _rightSwipGestureRecognizer.direction=UISwipeGestureRecognizerDirectionRight;
     [_rightSwipGestureRecognizer setNumberOfTouchesRequired:1];
@@ -164,14 +164,14 @@ UIAlertViewDelegate
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RefreshMainTable:) name:@"RefreshNotifi" object:nil];
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(CancelRefreshMainTable:) name:@"CancelOrderNotifi" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(CancelRefreshMainTable:) name:@"CancelOrderNotifi" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lookOrderDetails:) name:@"PaidOrderNotifi" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lookOrderDetails:) name:@"InvoiceOrderNotifi" object:nil];
 }
 
 //- (void)viewDidAppear:(BOOL)animated{
 //    [super viewDidAppear:animated];
-//    
+//
 //    MyMessage *mymessage=[MyMessage instance];
 //    NSLog(@"%@",mymessage.isOnline);
 //}
@@ -225,7 +225,7 @@ UIAlertViewDelegate
     NSLog(@"刷新");
     [self getData:@"1"];
     [_driverTable reloadData];
-
+    
 }
 
 -(void)showAlertView
@@ -245,7 +245,7 @@ UIAlertViewDelegate
     _drivername.textAlignment=NSTextAlignmentLeft;
     _drivername.font=[UIFont systemFontOfSize:TransfomFont(72)];
     [self.view addSubview:_drivername];
-
+    
     _driverinformation=[[UILabel alloc]initWithFrame:CGRectZero];
     //_driverinformation.text=@"舒适性";
     _driverinformation.textColor=[UIColor blackColor];
@@ -261,30 +261,30 @@ UIAlertViewDelegate
     [_drivername sizeToFit];
     _drivername.left=TransfomXY(136);
     _drivername.top=TransfomXY(172);
-
+    
     _driverinformation.center=_drivername.center;
     _driverinformation.top=_drivername.bottom+TransfomXY(10);
-
+    
     [self getInfo];  //获取司机资料
-
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
- 
+    flages = 1;
     _isRefresh = NO;
     MyMessage *mymessage=[MyMessage instance];
     
     NSString *isOnline=mymessage.isOnline;
-
+    
     
     if([isOnline isEqualToString:@"NO"]){
-         [_DriverunButton setTitle:@"出车" forState:UIControlStateNormal];
-            _DriverunButton.backgroundColor=Assist_COLOR;
+        [_DriverunButton setTitle:@"出车" forState:UIControlStateNormal];
+        _DriverunButton.backgroundColor=Assist_COLOR;
     }else
     {
-         [_DriverunButton setTitle:@"收车" forState:UIControlStateNormal];
-            _DriverunButton.backgroundColor=Main_COLOR;
+        [_DriverunButton setTitle:@"收车" forState:UIControlStateNormal];
+        _DriverunButton.backgroundColor=Main_COLOR;
     }
     
     if([mymessage.userinfoDic count]>0)
@@ -297,15 +297,15 @@ UIAlertViewDelegate
             [self ReLable];
         }
     }
-        else
-       {
-    _ratingBar.hidden=YES;
-    
-    QiFacade*       facade;
-    facade=[QiFacade sharedInstance];
-    _flagInfo=[facade getDriverInfo];
-    [facade addHttpObserver:self tag:_flagInfo];
-    
+    else
+    {
+        _ratingBar.hidden=YES;
+        
+        QiFacade*       facade;
+        facade=[QiFacade sharedInstance];
+        _flagInfo=[facade getDriverInfo];
+        [facade addHttpObserver:self tag:_flagInfo];
+        
     }
     
     
@@ -339,8 +339,12 @@ UIAlertViewDelegate
     [alert show];
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    flages = 0;
+}
+
 -(void)lookOrderDetails:(NSNotification *)info{
-    
+
     NSLog(@"－－－－－支付订单------");
     NSLog(@"%@",info.userInfo);
     NSDictionary *dic=[[NSDictionary alloc]initWithDictionary:info.userInfo];
@@ -350,9 +354,13 @@ UIAlertViewDelegate
     if([action isEqualToString:@"order_paid"])
     {
         _paidOrder_id = orderId;
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜" message:@"您有一个订单已支付，请继续下次服务" delegate:self cancelButtonTitle:@"查看订单详情" otherButtonTitles:@"知道了", nil];
-        alert.tag = 1001;
-        [alert show];
+        if (flages == 1) {
+            
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"恭喜" message:@"您有一个订单已支付，请继续下次服务" delegate:self cancelButtonTitle:@"查看订单详情" otherButtonTitles:@"知道了", nil];
+            alert.tag = 1001;
+            [alert show];
+            
+        }
     }
     if([action isEqualToString:@"order_invoice"])
     {
@@ -361,14 +369,16 @@ UIAlertViewDelegate
         alert.tag = 1002;
         [alert show];
     }
+    
+    
 }
 
 
 - (void)newOrderselector:(NSNotification *)text{
-
+    
     NSLog(@"－－－－－View接收到新订单------");
     NSLog(@"%@",text.userInfo);
-  
+    
 }
 #pragma mark  DetailsViewControllerDelegate
 
@@ -402,16 +412,16 @@ UIAlertViewDelegate
             [self ReLable];
         }
     }
-//    else
-//    {
-        _ratingBar.hidden=YES;
-        
-        QiFacade*       facade;
-        facade=[QiFacade sharedInstance];
-        _flagInfo=[facade getDriverInfo];
-        [facade addHttpObserver:self tag:_flagInfo];
-
-  //  }
+    //    else
+    //    {
+    _ratingBar.hidden=YES;
+    
+    QiFacade*       facade;
+    facade=[QiFacade sharedInstance];
+    _flagInfo=[facade getDriverInfo];
+    [facade addHttpObserver:self tag:_flagInfo];
+    
+    //  }
 }
 
 -(void)getData:(NSString *)page
@@ -440,20 +450,20 @@ UIAlertViewDelegate
     if(_userDic)
     {
         //car_type   1 经济型 2 舒适型 3 商务型
-//        NSString *driverinformationString=@"";
-//        NSString *car_type=[NSString stringWithFormat:@"%@",[_userDic objectForKey:@"car_type"]];
-//        if([car_type isEqualToString:@"1"])
-//        {
-//            driverinformationString=[NSString stringWithFormat:@"%@ 经济型",[_userDic objectForKey:@"license"]];
-//        }
-//        if([car_type isEqualToString:@"2"])
-//        {
-//            driverinformationString=[NSString stringWithFormat:@"%@ 舒适型",[_userDic objectForKey:@"license"]];
-//        }
-//        if([car_type isEqualToString:@"3"])
-//        {
-//            driverinformationString=[NSString stringWithFormat:@"%@ 商务型",[_userDic objectForKey:@"license"]];
-//        }
+        //        NSString *driverinformationString=@"";
+        //        NSString *car_type=[NSString stringWithFormat:@"%@",[_userDic objectForKey:@"car_type"]];
+        //        if([car_type isEqualToString:@"1"])
+        //        {
+        //            driverinformationString=[NSString stringWithFormat:@"%@ 经济型",[_userDic objectForKey:@"license"]];
+        //        }
+        //        if([car_type isEqualToString:@"2"])
+        //        {
+        //            driverinformationString=[NSString stringWithFormat:@"%@ 舒适型",[_userDic objectForKey:@"license"]];
+        //        }
+        //        if([car_type isEqualToString:@"3"])
+        //        {
+        //            driverinformationString=[NSString stringWithFormat:@"%@ 商务型",[_userDic objectForKey:@"license"]];
+        //        }
         _driverinformation.text= [NSString stringWithFormat:@"%@ %@", [_userDic objectForKey:@"brand"], [_userDic objectForKey:@"car_name"]];
         
         
@@ -467,25 +477,25 @@ UIAlertViewDelegate
         
         [_driverinformation sizeToFit];
         _driverinformation.origin=CGPointMake(60, TransfomXY(10)+_drivername.bottom);
-
+        
         _ratingBar.left=_drivername.left;
         _ratingBar.top=_driverinformation.bottom+TransfomXY(23);
         _ratingBar.hidden = NO;
-//        MyMessage *mymessage=[MyMessage instance];
-//        NSString *status=[_userDic objectForKey:@"status"];
+        //        MyMessage *mymessage=[MyMessage instance];
+        //        NSString *status=[_userDic objectForKey:@"status"];
         
         
-//        if([status isEqualToString:@"2"]){
-//            [_DriverunButton setTitle:@"收车" forState:UIControlStateNormal];
-//            _DriverunButton.backgroundColor=Main_COLOR;
-//            mymessage.isOnline=@"YES";
-//        }else
-//        {
-//            [_DriverunButton setTitle:@"出车" forState:UIControlStateNormal];
-//            _DriverunButton.backgroundColor=Assist_COLOR;
-//            mymessage.isOnline=@"NO";
-//        }
- 
+        //        if([status isEqualToString:@"2"]){
+        //            [_DriverunButton setTitle:@"收车" forState:UIControlStateNormal];
+        //            _DriverunButton.backgroundColor=Main_COLOR;
+        //            mymessage.isOnline=@"YES";
+        //        }else
+        //        {
+        //            [_DriverunButton setTitle:@"出车" forState:UIControlStateNormal];
+        //            _DriverunButton.backgroundColor=Assist_COLOR;
+        //            mymessage.isOnline=@"NO";
+        //        }
+        
     }
 }
 
@@ -496,7 +506,7 @@ UIAlertViewDelegate
     
     
     //评分
-     _ratingBar = [[RatingBar alloc] init];
+    _ratingBar = [[RatingBar alloc] init];
     _ratingBar.frame = CGRectMake(60, 100, 100, 30);
     _ratingBar.center=_drivername.center;
     _ratingBar.top=_driverinformation.bottom+TransfomXY(22);
@@ -508,8 +518,8 @@ UIAlertViewDelegate
     [_ratingBar setImageDeselected:@"ic_star_border_white_24dp.png" halfSelected:@"ic_star_half_white_24dp.png" fullSelected:@"ic_star_white_24dp.png" andDelegate:self];
     [_ratingBar displayRating:2.5];
     _ratingBar.hidden = YES;
-   // [_DriverunButton AddButton:self];
-   // _DriverunButton.backgroundColor=[UIColor grayColor];
+    // [_DriverunButton AddButton:self];
+    // _DriverunButton.backgroundColor=[UIColor grayColor];
 }
 
 
@@ -549,7 +559,7 @@ UIAlertViewDelegate
         _rightSwipGestureRecognizer.direction=UISwipeGestureRecognizerDirectionRight;
         return;
     }
-     _rightSwipGestureRecognizer.direction=UISwipeGestureRecognizerDirectionLeft;
+    _rightSwipGestureRecognizer.direction=UISwipeGestureRecognizerDirectionLeft;
     _backButton=[UIButton buttonWithType:UIButtonTypeCustom];
     _backButton.backgroundColor=[UIColor colorWithRed:(float)0x21/255 green:(float)0x21/255 blue:(float)0x21/255 alpha:0.5];
     _backButton.frame=CGRectMake(0, 0, KScreenWidth, KScreenHeight);
@@ -562,7 +572,7 @@ UIAlertViewDelegate
     _mysetView.m_delegate=self;
     [_backButton addSubview:_mysetView];
     
-
+    
     _leftSwipGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftBtnClicked)];
     _leftSwipGestureRecognizer.direction=UISwipeGestureRecognizerDirectionLeft;
     [_leftSwipGestureRecognizer setNumberOfTouchesRequired:1];
@@ -577,9 +587,9 @@ UIAlertViewDelegate
     }];
     
     
-
-
-
+    
+    
+    
 }
 -(void)removesetView:(UIButton *)sender
 {
@@ -603,7 +613,7 @@ UIAlertViewDelegate
             [_backButton removeGestureRecognizer:_leftSwipGestureRecognizer];
             _leftSwipGestureRecognizer=nil;
             [button removeFromSuperview];
-
+            
         }
     }];
 }
@@ -616,7 +626,7 @@ UIAlertViewDelegate
 }
 -(void)leftBtnClicked
 {
-
+    
     [UIView animateWithDuration:0.3 animations:^{
         
         _mysetView.frame=CGRectMake(-250, 0, 250, (SCREEN_HEIGHT));
@@ -654,7 +664,7 @@ UIAlertViewDelegate
         }else{
             [_ordersList removeAllObjects];
             [_driverTable reloadData];
-        
+            
         }
         
         if([_ordersList count]>0)
@@ -662,7 +672,7 @@ UIAlertViewDelegate
             _NotDatalable.hidden = YES;
             
         }else{
-             _NotDatalable.hidden = NO;
+            _NotDatalable.hidden = NO;
         }
         
     }
@@ -671,7 +681,7 @@ UIAlertViewDelegate
         _flagOffline=0;
         MyMessage *message=[MyMessage instance] ;
         message.isOnline=@"NO";
-         [_DriverunButton setTitle:@"出车" forState:UIControlStateNormal];
+        [_DriverunButton setTitle:@"出车" forState:UIControlStateNormal];
         _DriverunButton.backgroundColor=Assist_COLOR;
     }
     
@@ -732,13 +742,13 @@ UIAlertViewDelegate
     NSInteger intergerNum=3;
     intergerNum=[_ordersList count];
     
-
+    
     return intergerNum;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     static NSString *identify = @"SectionCell";
     DriverCell *sectionCell = [tableView dequeueReusableCellWithIdentifier:identify];
     if (sectionCell == nil) {
@@ -810,7 +820,7 @@ static SystemSoundID shake_sound_male_id = 0;
 - (void)ratingChanged:(float)newRating
 {
     NSLog(@"newRating=%f",newRating);
-
+    
 }
 
 #pragma mark -AlertView Delegate
