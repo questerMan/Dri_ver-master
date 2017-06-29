@@ -137,13 +137,10 @@ static SocketOne *sharedInstance = nil;
             [[NSNotificationCenter defaultCenter] postNotification:notification];
         }
     }
-    
-    
 }
 
 -(NSDictionary *)DicFromJson:(NSData *)response
 {
-
     NSError *error;
     NSDictionary *orderDic=[[NSDictionary alloc] init];
     orderDic = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];

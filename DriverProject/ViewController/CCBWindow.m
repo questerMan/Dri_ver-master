@@ -9,7 +9,7 @@
 #import "CCBWindow.h"
 //#import "DBModel.h"
 #import "OrderDetails.h"
-#define MAXSMSTIME 10
+#define MAXSMSTIME 60
 @interface CCBWindow ()
 <UIAlertViewDelegate>
 {
@@ -38,7 +38,7 @@ static  CCBWindow *sharedWindow = nil;
 
 @synthesize maskView;
 
-+(id)instance
++ (id)instance
 {
     if (nil == sharedWindow)
     {
@@ -74,7 +74,7 @@ static  CCBWindow *sharedWindow = nil;
     return self;
 }
 
--(void)timer{
+- (void)timer{
     if (smsTime>0) {
         smsTime--;
 
@@ -93,7 +93,7 @@ static  CCBWindow *sharedWindow = nil;
     
 }
 
--(void)setUIorderDic:(NSDictionary *)orderDic
+- (void)setUIorderDic:(NSDictionary *)orderDic
 {
     NSString *action=[orderDic objectForKey:@"action"];
     if([action isEqualToString:@"order_accept"])
@@ -112,7 +112,7 @@ static  CCBWindow *sharedWindow = nil;
 
 #pragma mark  *******私有方法********
 
--(void)replyOrder
+- (void)replyOrder
 {
     
     
@@ -125,6 +125,7 @@ static  CCBWindow *sharedWindow = nil;
         }
         _flag=0;
         [self hideshowWindow];
+        [self crateNotificationWithDic:nil];
     }
     AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *lon=[NSString stringWithFormat:@"%f",delegate.Newestlongitude];

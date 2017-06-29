@@ -61,7 +61,6 @@ UIAlertViewDelegate
 
 -(void)ADDtableView
 {
-    
     _page=1;isMore=NO;
     _setButton=[UIButton buttonWithType:UIButtonTypeCustom];
     _setButton.frame=CGRectMake(20,self.view.height-50, 24, 24);
@@ -86,7 +85,7 @@ UIAlertViewDelegate
     [self.view addSubview:_driverTable];
     
     _NotDatalable=[[UILabel alloc]initWithFrame:CGRectZero];
-    _NotDatalable.text=@"没有可服务的订单！";
+    _NotDatalable.text=@"下拉刷新订单！";
     _NotDatalable.textColor=TextDisable_COLOR;
     _NotDatalable.textAlignment=NSTextAlignmentCenter;
     _NotDatalable.font=[UIFont systemFontOfSize:14];
@@ -111,7 +110,6 @@ UIAlertViewDelegate
     [self.view addSubview:_DriverunButton];
     _DriverunButton.center=CGPointMake(KScreenWidth-40, KScreenHeight-40);
     _DriverunButton.titleLabel.textColor=UIColorFromRGB(0xffffff);
-    
     
     [self addButton];
 }
