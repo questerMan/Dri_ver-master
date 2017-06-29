@@ -196,6 +196,7 @@
             break;
     }
 }
+
 -(void)showTextOnlyWith:(NSString *)text
 {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
@@ -206,6 +207,7 @@
     
     [hud hide:YES afterDelay:3];
 }
+
 -(void)RunSocket
 {
     NSUserDefaults*userDefaults= [NSUserDefaults standardUserDefaults];
@@ -608,13 +610,14 @@
     }
     return NO;
 }
--(void)showWarningMessage:(NSString *)message{
+
+- (void)showWarningMessage:(NSString *)message{
     UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
     [alert show];
     
 }
 
--(void)putStateGetOffpointlat:latutide pointlon:longitude distance:totalDistance  ext:_extraPay
+- (void)putStateGetOffpointlat:latutide pointlon:longitude distance:totalDistance  ext:_extraPay
 {
     QiFacade*       facade;
     facade=[QiFacade sharedInstance];
@@ -629,7 +632,7 @@
     
 }
 
--(void)judeOrderType
+- (void)judeOrderType
 {
     NSArray *array=[DBModel GetDistanceArrayfromType:@"2" withRecentNum:1];
     NSArray *resultArray=[array objectAtIndex:0];
@@ -669,9 +672,6 @@
                 break;
         }
     }
-
-
-
 }
 
 #pragma mark - MALocationManager Delegate
@@ -967,13 +967,14 @@
 {
     [self sendHeardBeat];
 }
+
 -(void)sendHeardBeat
 {
-    if(_getLocationTimesNew>HEARTBEATTIME)
+    if(_getLocationTimesNew > HEARTBEATTIME)
     {
         _getLocationTimesNew=1;
-        NSString *longitude=[NSString stringWithFormat:@"%f",_Newestlongitude];
-        NSString *latutide=[NSString stringWithFormat:@"%f",_Newestlatutide];
+        NSString *longitude= [NSString stringWithFormat:@"%f",_Newestlongitude];
+        NSString *latutide= [NSString stringWithFormat:@"%f",_Newestlatutide];
         NSLog(@"心跳");
         QiFacade*       facade;
         facade=[QiFacade sharedInstance];

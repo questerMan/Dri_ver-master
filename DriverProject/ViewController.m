@@ -148,7 +148,7 @@ UIAlertViewDelegate
     NSLog(@"viewDidLoad");
     
 
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newOrderselector:) name:@"NewOrderNotifi" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newOrderselector:) name:@"NewOrderNotifi" object:nil];
     CCBWindow *Mywindow=[CCBWindow instance];
     Mywindow.MainDelegate=self;
     
@@ -607,6 +607,7 @@ UIAlertViewDelegate
         }
     }];
 }
+
 -(void)removesetView
 {
     _rightSwipGestureRecognizer.direction=UISwipeGestureRecognizerDirectionRight;
@@ -755,6 +756,7 @@ UIAlertViewDelegate
     
     return sectionCell;
 }
+
 #pragma mark - 添加声音
 static SystemSoundID shake_sound_male_id = 0;
 
