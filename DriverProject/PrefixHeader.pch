@@ -34,7 +34,7 @@
 
     #import "CCBBaseViewController.h"
 
-
+static NSInteger flages = 0;//(0:其他页面  1:ViewController页面  2:DetailsViewController页面)
 
 #ifndef __OPTIMIZE__
 #define NSLog(...) NSLog(__VA_ARGS__)
