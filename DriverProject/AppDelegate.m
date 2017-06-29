@@ -912,8 +912,6 @@
                 [self.locationTimer fire];
             }
         }
-
-    
 }
 
 -(BOOL)isReceiveLoationBack;{
@@ -982,7 +980,6 @@
             //心跳
             _flag=[facade postHeartbeat:latutide pointlon:longitude];
             [facade addHttpObserver:self tag:_flag];
-            
         }];
      
     }

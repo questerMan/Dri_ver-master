@@ -36,7 +36,7 @@
     return NO;
 }
 
-+(BOOL)InsertWithMsgType:(NSString*)msgType Message:(NSString*)message Date:(NSString*)timeStr MsgSeq:(NSString *)msgSeq andIsRead:(NSString *)isRead{
++ (BOOL)InsertWithMsgType:(NSString*)msgType Message:(NSString*)message Date:(NSString*)timeStr MsgSeq:(NSString *)msgSeq andIsRead:(NSString *)isRead{
     //paths： ios下Document路径，Document为ios中可读写的文件夹
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths objectAtIndex:0];

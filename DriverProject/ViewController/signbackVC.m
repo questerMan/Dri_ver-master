@@ -100,7 +100,7 @@
     facade=[QiFacade sharedInstance];
     _flag=[facade putDriverSignoutState:signOut reasonFor:reason];
     [facade addHttpObserver:self tag:_flag];
-    [self showLoadingWithText:@"加载"];
+    [self showLoadingWithText:@"加载中..."];
 }
 
 

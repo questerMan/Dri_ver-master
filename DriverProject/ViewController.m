@@ -436,7 +436,7 @@ UIAlertViewDelegate
     NSLog(@"takeOutMoneyFlag=%ld",(long)_flag);
     [facade addHttpObserver:self tag:_flag];
     if(_isRefresh){
-        [self showLoadingWithText:@"加载"];
+        [self showLoadingWithText:@"加载中..."];
     }else{
         _isRefresh = YES;
     }

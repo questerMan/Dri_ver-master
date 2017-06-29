@@ -90,7 +90,6 @@ static  CCBWindow *sharedWindow = nil;
         [self hideshowWindow];
 
     }
-    
 }
 
 - (void)setUIorderDic:(NSDictionary *)orderDic
@@ -125,6 +124,7 @@ static  CCBWindow *sharedWindow = nil;
         }
         _flag=0;
         [self hideshowWindow];
+        
         [self crateNotificationWithDic:nil];
     }
     AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -173,10 +173,9 @@ static  CCBWindow *sharedWindow = nil;
     sharedWindow=nil;
      [[[[UIApplication sharedApplication] delegate] window] makeKeyAndVisible];
     _SelfisShow=NO;
-
-
-
+        
 }
+
 -(void)show
 {
     if(_SelfisShow)
@@ -204,6 +203,7 @@ static  CCBWindow *sharedWindow = nil;
    
 
 }
+
 #pragma 网络处理
 
 - (void)requestFinished:(NSDictionary*)response tag:(NSInteger)iRequestTag

@@ -711,7 +711,7 @@ NSString const *DownloadStageInfoKey2      = @"DownloadStageInfoKey";
     facade=[QiFacade sharedInstance];
     _flag=[facade getCitysLIst];
     [facade addHttpObserver:self tag:_flag];
-    [self showLoadingWithText:@"加载"];
+    [self showLoadingWithText:@"加载中..."];
 
 }
 

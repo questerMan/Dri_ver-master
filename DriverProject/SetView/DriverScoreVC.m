@@ -164,7 +164,7 @@
         facade=[QiFacade sharedInstance];
         _monthflag=[facade getDriverAccountMonth:_monthString withpage:page];
         [facade addHttpObserver:self tag:_monthflag];
-        [self showLoadingWithText:@"加载"];
+        [self showLoadingWithText:@"加载中..."];
     }
     
 }
@@ -263,7 +263,7 @@
     facade=[QiFacade sharedInstance];
     _flag=[facade getDriverAccount];
     [facade addHttpObserver:self tag:_flag];
-    [self showLoadingWithText:@"加载"];
+    [self showLoadingWithText:@"加载中..."];
     
 }
 
@@ -306,7 +306,7 @@
     facade=[QiFacade sharedInstance];
     _monthflag=[facade getDriverAccountMonth:monthString withpage:@"1"];
     [facade addHttpObserver:self tag:_monthflag];
-    [self showLoadingWithText:@"加载"];
+    [self showLoadingWithText:@"加载中..."];
     
     //改变button的底色
     [self changButtonColor:Number];
