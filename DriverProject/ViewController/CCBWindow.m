@@ -114,9 +114,6 @@ static  CCBWindow *sharedWindow = nil;
 
 - (void)replyOrder
 {
-    
-    
-    
     if([_confirmBTitle isEqualToString:@"知道了"])
     {
         if([(NSObject *)_MainDelegate respondsToSelector:@selector(ReLoadingTableViewDate)])
