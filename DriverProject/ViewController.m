@@ -525,6 +525,7 @@ UIAlertViewDelegate
     // [_DriverunButton AddButton:self];
     // _DriverunButton.backgroundColor=[UIColor grayColor];
 }
+
 #pragma mark - 只有点击出行上班之后才有一些列刷新
 -(void)refreshRunDriver{
     
@@ -536,11 +537,7 @@ UIAlertViewDelegate
         QiFacade*       facade;
         facade=[QiFacade sharedInstance];
         
-        if([isOnline isEqualToString:@"NO"]){
-            
-        }
-        else
-        {
+        if(![isOnline isEqualToString:@"NO"]){
             _flagOnline=[facade putDriverAttendance];
             [facade addHttpObserver:self tag:_flagOnline];
         }
@@ -715,7 +712,7 @@ UIAlertViewDelegate
         MyMessage *message=[MyMessage instance] ;
         message.isOnline=@"YES";
         [_DriverunButton setTitle:@"收车" forState:UIControlStateNormal];
-        _DriverunButton.backgroundColor=Main_COLOR;
+        _DriverunButton.backgroundColor = Main_COLOR;
     }
     if(_flagreply!=0&&_flagreply==iRequestTag)
     {
@@ -724,7 +721,6 @@ UIAlertViewDelegate
     }
     if(_flagInfo!=0&&_flagInfo==iRequestTag)
     {
-        
         _ratingBar.hidden=NO;
         _userDic=[response objectForKey:@"data"];
         if(_userDic)

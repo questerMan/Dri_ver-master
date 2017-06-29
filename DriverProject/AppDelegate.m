@@ -689,7 +689,7 @@
             return; 
         }
     }
-    self.getLocationTimes=1;
+    self.getLocationTimes = 1;
     //获取地理位置
     if ( location!=nil && location.coordinate.latitude!=-1 && location.coordinate.longitude!=-1)
     {
@@ -733,7 +733,7 @@
                 }
             }
         }
-        if(_ProcessStates==Orderonway)  //接客途中
+        if(_ProcessStates == Orderonway)  //接客途中
         {
             QiFacade*       facade;
             facade=[QiFacade sharedInstance];
