@@ -263,10 +263,8 @@
     IntegerPost=[self handleDataIsStringPut:StringURL paraDic:requestDict];
     
     return IntegerPost;
-
-
-
 }
+
 #pragma mark   行程中
 -(NSInteger)putDriverOrderState:(NSString *)OrderID pointlat:(NSString *)lat pointlon:(NSString *)lon  segment:(NSString *)segment distance:(NSString *)dis
 {
