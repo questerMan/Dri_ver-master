@@ -392,6 +392,7 @@
 		82662D381F0381A50050A2A6 /* IsNewWorkState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IsNewWorkState.m; sourceTree = "<group>"; };
 		8297539E1E8E459700E620BD /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		8297539F1E8E459700E620BD /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+		82D1A39D1F06027C00615C8E /* DriverProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DriverProject.entitlements; sourceTree = "<group>"; };
 		82F1B9E41E94C4E10096EDA8 /* ic_settitleImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_settitleImage.png; sourceTree = "<group>"; };
 		B31D15581C07772A00303026 /* login_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_image.png; sourceTree = "<group>"; };
 		B31D155A1C07790200303026 /* ic_directions_car_white_36dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_directions_car_white_36dp.png; sourceTree = "<group>"; };
@@ -917,6 +918,7 @@
 		B3224A551B983D8700696D66 /* DriverProject */ = {
 			isa = PBXGroup;
 			children = (
+				82D1A39D1F06027C00615C8E /* DriverProject.entitlements */,
 				82662D1A1F0362FD0050A2A6 /* AFNetworking */,
 				CC9D63A01EF7A38F00B8FF34 /* UMessage_Sdk_All_1.5.0a */,
 				46BAD84C1BB25B81006C5B73 /* GaodeMap */,
