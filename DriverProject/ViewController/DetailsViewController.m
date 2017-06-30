@@ -350,19 +350,19 @@
         
         
     }
-    else if(_driverstates==StateReceiveOrders)
+    else if(_driverstates==StateReceiveOrders)//前往乘客点
     {
         NSString *orderString=[NSString stringWithFormat:@"/order/%@/setoff",_orderID];
         _flagorder = [facade putDriverOrderState:orderString pointlat:latutide pointlon:longitude distance:@"100"];
         
     }
     
-    else if(_driverstates == Statesetoff)
+    else if(_driverstates == Statesetoff)//到达乘客点
     {
         NSString *orderString=[NSString stringWithFormat:@"/order/%@/arrived",_orderID];
         _flagorder=[facade putDriverOrderState:orderString pointlat:latutide pointlon:longitude];
     }
-    else if(_driverstates==StateGoToArrived)
+    else if(_driverstates==StateGoToArrived)//开始计费
     {
         NSString *orderString=[NSString stringWithFormat:@"/order/%@/geton",_orderID];
         _flagorder=[facade putDriverOrderState:orderString pointlat:latutide pointlon:longitude];
