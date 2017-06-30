@@ -7,6 +7,7 @@
 //
 
 #import "DetailsViewController.h"
+#import "AFNetworking.h"
 #import "MANaviViewC.h"
 
 #import "leftsetCell.h"
@@ -214,12 +215,16 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)Confirm
+- (void)Confirm
 {
+    
+    if (![AFNetworkReachabilityManager sharedManager].reachable) {
+        [self showTextOnlyWith:@"请检查网络"];
+        return;
+    }
     
     if(_driverstates==StateEndAndPay)  return;
     [self showAlertView:_driverstates];
-    
 }
 
 -(void)showAlertView:(OrdersStates)states
@@ -348,11 +353,11 @@
     else if(_driverstates==StateReceiveOrders)
     {
         NSString *orderString=[NSString stringWithFormat:@"/order/%@/setoff",_orderID];
-        _flagorder= [facade putDriverOrderState:orderString pointlat:latutide pointlon:longitude distance:@"100"];
+        _flagorder = [facade putDriverOrderState:orderString pointlat:latutide pointlon:longitude distance:@"100"];
         
     }
     
-    else if(_driverstates==Statesetoff)
+    else if(_driverstates == Statesetoff)
     {
         NSString *orderString=[NSString stringWithFormat:@"/order/%@/arrived",_orderID];
         _flagorder=[facade putDriverOrderState:orderString pointlat:latutide pointlon:longitude];
@@ -361,8 +366,6 @@
     {
         NSString *orderString=[NSString stringWithFormat:@"/order/%@/geton",_orderID];
         _flagorder=[facade putDriverOrderState:orderString pointlat:latutide pointlon:longitude];
-        
-        
     }
     else if(_driverstates==StateGoToPickUp)
     {
@@ -542,6 +545,7 @@
         
         if(buttonIndex==0)
         {
+            
             if(alertView.alertViewStyle==UIAlertViewStylePlainTextInput)
             {
                 NSString *pay=[alertView textFieldAtIndex:0].text;
@@ -555,7 +559,7 @@
             }
             else
             {
-                if(_driverstates==StateGoToArrived)
+                if(_driverstates == StateGoToArrived)
                 {
                     AppDelegate *delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
                     if(delegate.isInsertS)
@@ -699,7 +703,7 @@
     NSLog(@"成功 /n%@",response);
     
     NSDictionary *OrderDic=[response objectForKey:@"data"];
-    if(_flag!=0&&iRequestTag==_flag)
+    if(_flag != 0 && iRequestTag == _flag)
     {
         _flag=0;
         _orderDetailDic=[NSDictionary dictionaryWithDictionary:response];
@@ -709,20 +713,20 @@
         //0 默认 1 司机接单 2 司机发车 3 司机到达上车点 4 乘客上车行驶 5  等待付款 6已付款
         NSString *statusString=[NSString stringWithFormat:@"%@",[_orderDetailDic objectForKey:@"status"]];
         NSInteger status=[statusString integerValue];
-        if(status==0)status=1;
+        if(status==0) status=1;
         
         
         switch (status) {
             case 0:
-                _driverstates=StateNullOrders;
+                _driverstates = StateNullOrders;
                 break;
             case 1:
             {
-                _driverstates=StateReceiveOrders;
+                _driverstates = StateReceiveOrders;
                 _Timelable.text=@"";
                 lableStr =  [self backTringFromtype];
                 delegate.ProcessStates=Ordersetoff;
-                delegate.orderID=_orderID;
+                delegate.orderID = _orderID;
                 break;
             }
             case 2:
