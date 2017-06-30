@@ -638,6 +638,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row==2 ||indexPath.row == 1)
     {
+        if (![AFNetworkReachabilityManager sharedManager].reachable) {
+            [self showTextOnlyWith:@"请检查网络"];
+            return;
+        }
+        
         NSDictionary *dest = [_orderDetailDic objectForKey:@"dest"];
         if (indexPath.row == 1) {
             dest = [_orderDetailDic objectForKey:@"origin"];
@@ -713,7 +718,7 @@
         //0 默认 1 司机接单 2 司机发车 3 司机到达上车点 4 乘客上车行驶 5  等待付款 6已付款
         NSString *statusString=[NSString stringWithFormat:@"%@",[_orderDetailDic objectForKey:@"status"]];
         NSInteger status=[statusString integerValue];
-        if(status==0) status=1;
+        if(status == 0) status=1;
         
         
         switch (status) {
@@ -774,7 +779,7 @@
                     lableStr=[NSString stringWithFormat:@"¥%@/%@km/%@min",[[response objectForKey:@"fee"] stringValue],[[response objectForKey:@"km"] stringValue],[[response objectForKey:@"minutes"] stringValue]];
                 }
                 [_ConfirmButton setImage:[UIImage imageNamed:@"ic_money_white@3x.png"] forState:UIControlStateNormal];
-                delegate.ProcessStates=Ordergetoff;
+                delegate.ProcessStates = Ordergetoff;
                 delegate.orderID=_orderID;
                 break;
             }

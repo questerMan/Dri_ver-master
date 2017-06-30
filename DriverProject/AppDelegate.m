@@ -493,9 +493,6 @@
             [self onReceiveLoation:nil];
         }
     } afterDelay:20];
-    
-    
-    
 }
 
 - (void)performBlock:(void (^)(void))block afterDelay:(NSTimeInterval)delay
