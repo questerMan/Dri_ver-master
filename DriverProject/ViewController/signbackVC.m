@@ -8,6 +8,7 @@
 
 #import "signbackVC.h"
 #import "MyMessage.h"
+#import "AFNetworking.h"
 @interface signbackVC ()<UIAlertViewDelegate>
 {
     NSInteger _flag;
@@ -113,6 +114,10 @@
 }
 -(void)signoutBu
 {
+    if (![AFNetworkReachabilityManager sharedManager].reachable) {
+        [self showTextOnlyWith:@"请检查网络"];
+        return;
+    }
     _reason=@"是否确定下班收车？";
     _signOut=@"1";
     [self signoutB];
@@ -267,6 +272,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (![AFNetworkReachabilityManager sharedManager].reachable) {
+        [self showTextOnlyWith:@"请检查网络"];
+        return;
+    }
+    
      [tableView deselectRowAtIndexPath:indexPath animated:YES];
     _reason=[NSString stringWithFormat:@"%@，停止新订单提醒",[orderDetailArr objectAtIndex:indexPath.row]];
     _signOut=@"2";
